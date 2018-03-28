@@ -13,6 +13,9 @@ class ViewController: UIViewController {
     let allQuestions = QuestionBank()
     var currentIndex : Int = 0
     var score : Int = 0
+    var currentQuestion: Question {
+        return allQuestions.list[currentIndex]
+    }
 
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
@@ -47,7 +50,7 @@ class ViewController: UIViewController {
     
 
     func nextQuestion() {
-
+        
         if currentIndex + 1 < allQuestions.list.count {
             currentIndex += 1
             updateQuestionText()
@@ -70,7 +73,7 @@ class ViewController: UIViewController {
     
     func checkAnswer(selectedAnswer : Bool) {
 
-        if currentQuestion().answer == selectedAnswer {
+        if currentQuestion.answer == selectedAnswer {
             score += 1
             ProgressHUD.showSuccess("Correct!")
         } else {
@@ -89,12 +92,8 @@ class ViewController: UIViewController {
        
     }
 
-    func currentQuestion() -> Question {
-        return allQuestions.list[currentIndex]
-    }
-
     func updateQuestionText() {
-        questionLabel.text = currentQuestion().questionText
+        questionLabel.text = currentQuestion.questionText
     }
     
 }
